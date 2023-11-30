@@ -42,17 +42,20 @@ public final class FrontDatabaseProtocolTypeFactory {
      * @return front database protocol type
      */
     public static DatabaseType getDatabaseType() {
-        Optional<DatabaseType> configuredDatabaseType = findConfiguredDatabaseType();
-        if (configuredDatabaseType.isPresent()) {
-            return configuredDatabaseType.get();
-        }
-        MetaDataContexts metaDataContexts = ProxyContext.getInstance().getContextManager().getMetaDataContexts();
-        if (metaDataContexts.getMetaData().getDatabases().isEmpty()) {
-            return TypedSPILoader.getService(DatabaseType.class, DEFAULT_FRONTEND_DATABASE_PROTOCOL_TYPE);
-        }
-        Optional<ShardingSphereDatabase> database = metaDataContexts.getMetaData().getDatabases().values().stream().filter(ShardingSphereDatabase::containsDataSource).findFirst();
-        return database.isPresent() ? database.get().getResourceMetaData().getStorageUnitMetaData().getStorageUnits().values().iterator().next().getStorageType()
-                : TypedSPILoader.getService(DatabaseType.class, DEFAULT_FRONTEND_DATABASE_PROTOCOL_TYPE);
+//        Optional<DatabaseType> configuredDatabaseType = findConfiguredDatabaseType();
+//        if (configuredDatabaseType.isPresent()) {
+//            return configuredDatabaseType.get();
+//        }
+//        MetaDataContexts metaDataContexts = ProxyContext.getInstance().getContextManager().getMetaDataContexts();
+//        if (metaDataContexts.getMetaData().getDatabases().isEmpty()) {
+//            return TypedSPILoader.getService(DatabaseType.class, DEFAULT_FRONTEND_DATABASE_PROTOCOL_TYPE);
+//        }
+//        Optional<ShardingSphereDatabase> database = metaDataContexts.getMetaData().getDatabases().values().stream().filter(ShardingSphereDatabase::containsDataSource).findFirst();
+//        return database.isPresent() ? database.get().getResourceMetaData().getStorageUnitMetaData().getStorageUnits().values().iterator().next().getStorageType()
+//                : TypedSPILoader.getService(DatabaseType.class, DEFAULT_FRONTEND_DATABASE_PROTOCOL_TYPE);
+
+        // 只对接 mysql 驱动连接
+        return TypedSPILoader.getService(DatabaseType.class, DEFAULT_FRONTEND_DATABASE_PROTOCOL_TYPE);
     }
     
     private static Optional<DatabaseType> findConfiguredDatabaseType() {

@@ -43,6 +43,7 @@ public final class JooQDialectRegistry {
         DATABASE_DIALECT_MAP.put(TypedSPILoader.getService(DatabaseType.class, "openGauss"), SQLDialect.POSTGRES);
         DATABASE_DIALECT_MAP.put(TypedSPILoader.getService(DatabaseType.class, "H2"), SQLDialect.H2);
         DATABASE_DIALECT_MAP.put(TypedSPILoader.getService(DatabaseType.class, "SQL92"), SQLDialect.DEFAULT);
+        DATABASE_DIALECT_MAP.put(TypedSPILoader.getService(DatabaseType.class, "Dm"), SQLDialect.POSTGRES);
     }
     
     /**
